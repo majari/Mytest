@@ -6,9 +6,9 @@
 int main()
 {
    const int N = 6;
- 	 int keys_h[N] = {  1,   2,   1,   2,   4,   1};
+   int keys_h[N] = {  1,   2,   1,   2,   4,   1};
    int values_h[N] = {10,20,300,400,600,200};
-	 int *keys_d,*values_d; 
+   int *keys_d,*values_d; 
 	
 	size_t size = N * sizeof(int);
  
