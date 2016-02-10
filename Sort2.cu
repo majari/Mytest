@@ -25,8 +25,8 @@ int main()
 
  	for(int i=0; i<N; i++)printf("%d %d \n",keys_h[i],values_h[i]);
 	
-	free(keys_h); cudaFree(keys_d);
-	free(values_h); cudaFree(values_d);
+        cudaFree(keys_d);
+        cudaFree(values_d);
  
 	 return 0;
 }
