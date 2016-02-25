@@ -5,7 +5,6 @@ int main()
 	int data[50][50];
 	int i,j,rows,cols,gb_col,agg_funcs_count,agg_cols[50],agg_cols_count;
 	int agg_funcs[5];
-	clrscr();
 
 	printf("Enter number of rows:");
 	scanf("%d",&rows);
@@ -40,7 +39,6 @@ int main()
 	}
 	group_by(rows,cols,data,gb_col, agg_funcs, agg_funcs_count,  agg_cols,agg_cols_count);
 
-	getch();
 	return 0;
 
 }
