@@ -7,38 +7,37 @@ int main()
 	int agg_funcs[5];
 	clrscr();
 
-	printf("Enter number of rows");
+	printf("Enter number of rows:");
 	scanf("%d",&rows);
 
-	printf("Enter number of columns");
+	printf("Enter number of columns:");
 	scanf("%d",&cols);
 
-	printf("Enter elements of the array");
+	printf("Enter elements of the array:");
 	for(i=0;i<rows;i++)
 	for(j=0;j<cols;j++)
 	{
 		scanf("%d",&data[i][j]);
-	       //	data_output[i][j]=data[i][j];
 	}
-	printf("Enter column for groupby query");
+	printf("Enter column for groupby query:");
 	scanf("%d",&gb_col);
 
-	printf("Enter number of cols to be aggregated");
+	printf("Enter number of cols to be aggregated:");
 	scanf("%d",&agg_cols_count);
 
-	printf("Enter cols to be aggregated");
+	printf("Enter cols to be aggregated:");
 	for(i=0;i<agg_cols_count;i++)
 	scanf("%d",&agg_cols[i]);
 
-	printf("Enter the number of funcs to be implemented");
+	printf("Enter the number of funcs to be implemented:");
 	scanf("%d",&agg_funcs_count);
 
-	printf("Enter the agg funcs to be used");
+	printf("Enter the agg funcs to be used:");
+	printf("\n Enter 1 : Sum \n 2 : Minimum \n 3 : Maximum \n");
 	for(i=0;i<agg_funcs_count;i++)
 	{
 		scanf("%d",&agg_funcs[i]);
 	}
-	//printf(" gb_Col: %d",gb_col);
 	group_by(rows,cols,data,gb_col, agg_funcs, agg_funcs_count,  agg_cols,agg_cols_count);
 
 	getch();
@@ -50,7 +49,6 @@ void group_by(int rows,int cols,int data[50][50],int gb_col,int agg_funcs[5],int
 	int i,p,j,c,k,l, data_output[50][50];
 	for(p=0;p<agg_funcs_count;p++)
 	{
-		int count= 0;
 		for(i=0; i<rows; i++)
 		for(j=0; j<cols; j++)
 			data_output[i][j] = data[i][j];
@@ -64,13 +62,9 @@ void group_by(int rows,int cols,int data[50][50],int gb_col,int agg_funcs[5],int
 
 					 if(data_output[i][gb_col] == data_output[j][gb_col])
 					 {
-					     count++;
-					     // printf("Data: %d",data_output[j][gb_col]);
-					     //printf("C: %d",count);
 					     for(k=0; k<agg_cols_count; k++)
 					     {
 						data_output[i][agg_cols[k]]=data_output[i][agg_cols[k]]+data_output[j][agg_cols[k]];
-					       //	printf("D: %d ",data_output[i][agg_cols[k]]);
 					     }
 					     for(l=0; l<cols; l++)
 					     {
@@ -89,7 +83,6 @@ void group_by(int rows,int cols,int data[50][50],int gb_col,int agg_funcs[5],int
 					{
 					 if(data_output[i][gb_col]==data_output[j][gb_col])
 					{
-					  count++;
 					  for(k=0;k<agg_cols_count;k++)
 					{
 						if(data_output[j][agg_cols[k]]<=data_output[i][agg_cols[k]])
@@ -108,15 +101,14 @@ void group_by(int rows,int cols,int data[50][50],int gb_col,int agg_funcs[5],int
 					for(j=i+1; j<rows; j++)
 					{
 					 if(data_output[i][gb_col]==data_output[j][gb_col])
-					{
-					  count++;
-					  for(k=0;k<agg_cols_count;k++)
-					{
-						if(data_output[j][agg_cols[k]]>data_output[i][agg_cols[k]])
-						data_output[i][agg_cols[k]]=data_output[j][agg_cols[k]];
-					}
-					for(l=0;l<cols;l++)
-					data_output[j][l]=0;
+					 {
+						  for(k=0;k<agg_cols_count;k++)
+						{
+							if(data_output[j][agg_cols[k]]>data_output[i][agg_cols[k]])
+							data_output[i][agg_cols[k]]=data_output[j][agg_cols[k]];
+						}
+						for(l=0;l<cols;l++)
+						data_output[j][l]=0;
 					}
 				}
 			}
